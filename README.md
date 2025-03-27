@@ -1,4 +1,4 @@
-# fmp_plugin_template
+# FullMoonTester
 A project tests all fmplib APIs. It uses as much fmplib APIs and check whether they work correctly.
 
 This plugin can also be used for testing the stability of your server. 

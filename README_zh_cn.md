@@ -1,4 +1,4 @@
-# fmp_plugin_template
+# FullMoonTester
 项目测试所有 fmplib API。它使用尽可能多的 fmplib API 并检查它们是否正常工作。
 
 此插件还可用于测试服务器的稳定性。
