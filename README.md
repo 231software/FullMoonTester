@@ -1,16 +1,51 @@
 # fmp_plugin_template
-A full moon platform plugin template.
+A project tests all fmplib APIs. It uses as much fmplib APIs and check whether they work correctly.
+
+This plugin can also be used for testing the stability of your server. 
+
+[简体中文](README_zh_cn.md)
 
 ## Usage
 
-Before using this mod template, make sure that you have installed Node.JS.
+> [!WARNING]  
+> Before running your server with this plugin, you should backup all your data first, as this plugin is likely to **MAKE DESTRUCTIVE MODIFICATIONS** in your server!
 
-1. Generate a new repository from this template.
-2. Clone the new repository into a local folder.
-3. Download the full moon platform builder from github.com/231software/fullmoonplatform/releases , extract the zip file, and put `build` folder into the root of the repository.
-4. Change the configration such as name, description, data path, plugin directory name, permission root in `plugin.json`.
-5. Add your code.
-6. Run `npm install` in the root of the repository to install necessary npm packages.
-7. Run `npm run build` to build the plugin.
+### Test fmplib APIs
 
-Now the build is complete at `dist`. If you want to change the build directory, change the `build_dir` config in `plugin.json`.
+1. Prepare an environment as new as possible. For example, you'd better install a brand new server only with this plugin and its requirements. The server shouldn't have any existing data. 
+2. 
+  - If you want to test all fmplib APIs, please directly start the server. 
+  - If you want to test specified APIs, open or create this plugin's data folder, create a file named config.json, and write the following into it:
+```json
+{
+    "tested_apis":{
+        "mode":"whitelist",
+        "list":[
+            //Write the APIs you want to test here and delete this annotation-like text
+        ]
+    }
+}
+```
+  start your server after editing and saving the required file above. 
+3. Join the server and do those actions following the instructions in game. The whole test may be stopped prematurely due to unrecoverable error.
+4. After all the tests are done, check the server console to learn about which APIs are working incorrectly. 
+
+### Test server stability
+
+1. **Backup your server data first!!!**
+2. 
+  - If you want to test all fmplib APIs, please directly start the server. 
+  - If you want to test specified APIs, open or create this plugin's data folder, create a file named config.json, and write the following into it:
+```json
+{
+    "tested_apis":{
+        "mode":"whitelist",
+        "list":[
+            //Write the APIs you want to test here and delete this annotation-like text
+        ]
+    }
+}
+```
+  start your server after editing and saving the required file above. 
+3. Join the server and do those actions following the instructions in game. The whole test may be stopped prematurely due to unrecoverable error.
+4. After all the tests are done, check the server console to learn about which APIs are working incorrectly. 
