@@ -1,20 +1,21 @@
 {
-    "name":"Full Moon Platform plugin example",
+    "name":"FullMoonTester",
     "main":"index",
     "description":"A plugin developed with Full Moon Platform.",
     "build_dir":"dist",
-    "data_path":"fmp_plugin_example",
+    "data_path":"FullMoonTester",
     "src_dir":"src",
-    "plugin_dir_name":"fmp_plugin_example",
+    "plugin_dir_name":"FullMoonTester",
     "supported_platforms":{
         "mode":"bl",
-        "list":[]
+        "list":["esjse"]
     },
-    "permissionRoot":"fmppluginexample",
+    "permissionRoot":"fullmoontester",
     "features":[],
     "priorities":{
         "default":[
             "LNSDK"
         ]
-    }
+    },
+    "files":["file.ts","tools.ts","net.ts"]
 }

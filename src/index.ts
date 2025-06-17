@@ -1,5 +1,13 @@
-import {Logger,InitEvent} from "../lib/index.js";
+import {
+    Logger,
+    InitEvent,
+    JsonFile
+} from "../lib/index.js";
+require("./file.js")
+require("./tools.js")
+import {start as netStart} from "./net.js"
+netStart();
 InitEvent.on((e)=>{
-    Logger.info("This Full Moon Platform plugin successfully loaded.");
+    Logger.info("插件初始化事件正常触发");
     return true;
 })

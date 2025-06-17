@@ -1,3 +1,6 @@
 build
 node_modules
 dist
+FullMoonTester
+temp
+.DS_Store
