@@ -1,4 +1,4 @@
-import { Logger,HTTPServer, HTTPRequest, HTTPMethod } from "../lib";
+import { Logger,HTTPServer, HTTPRequest, HTTPMethod, HTTPContentType } from "../lib";
 import { runtimeID } from "./tools";
 //如果在开服的时候立即执行http测试，可能会因为前置未初始化完毕导致出错
 export function start(){
@@ -32,29 +32,34 @@ export function start(){
         Logger.info("即将测试sendJSONSimpleGET")
         for(let i=1;i<=3;i++){
             Logger.info("正在向测试服务器发送测试请求：第"+i+"条");
-            await new Promise<void>(resolve=>HTTPRequest.sendSimpleGET("localhost",data=>{
+            try{
+                const data=await (await HTTPRequest.sendSimpleGET("localhost:"+testPort)).getBody()
                 if(data.trim()==="客户端发送的请求体为空。")Logger.info("请求已得到回复，内容正常。");
                 else {
                     Logger.error("请求得到的回复不正常："+data)
                     Logger.error("实际长度："+data.length)
-                }
-                resolve()
-                //100ms后开始下一轮请求
-                setTimeout(resolve,100)
-            },"",testPort,{},e=>Logger.error("http请求失败，详情："+e.message)))
+                }                
+            }
+            catch(e:any){
+                Logger.error("http请求失败，详情："+e.message)
+            }
+            //100ms后开始下一轮请求
+            await new Promise<void>(resolve=>setTimeout(resolve,100))
         }
         Logger.info("即将测试sendJSONSimplePOST")
         //测试简单post
-        await new Promise<void>(resolve=>HTTPRequest.sendJSONSimplePOST("localhost","{}",data=>{
+        const data=await (await HTTPRequest.sendSimplePOST("localhost:"+testPort,HTTPContentType.JSON,"{}")).getBody()
+        try{
             if(data.trim()==="{}")Logger.info("请求已得到回复，内容正常。")
             else Logger.error("请求得到的回复不正常："+data)
-            resolve()
-        },"",testPort,{},e=>Logger.error("http请求失败，详情："+e.message)))
+        }
+        catch(e:any){
+            Logger.error("http请求失败，详情："+e.message)
+        }
         Logger.info("http测试全部完成。");
-    })().then(()=>{
         Logger.info("现在关闭http服务器。");
         server.stop().then(()=>Logger.info("http服务器已成功关闭"))
-    })    
+    })()
     //10秒后关闭服务器，防止前面代码出错导致原定的关闭计划被搁置
     setTimeout(()=>{
         Logger.info("正在关闭http服务器以避免端口冲突")
