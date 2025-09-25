@@ -11,7 +11,10 @@
         "list":["esjse"]
     },
     "permissionRoot":"fullmoontester",
-    "features":[],
+    "features":[
+        "yml",
+        "ws"
+    ],
     "priorities":{
         "default":[
             "LNSDK"

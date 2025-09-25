@@ -1,7 +1,6 @@
 import {
     Logger,
-    InitEvent,
-    JSONFile
+    InitEvent
 } from "../lib/index.js";
 require("./file.js")
 require("./tools.js")
