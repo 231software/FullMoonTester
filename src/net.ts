@@ -24,12 +24,12 @@ export function start(){
 
     })
     Logger.info("服务器已创建，正在开启。");
-    server.start().then(()=>{for(let i=1;i<5;i++)Logger.info("http测试服务器已启动，端口"+testPort)});
+    server.start().then(()=>Logger.info("http测试服务器已启动，端口"+testPort));
     //5秒后关闭服务器，防止前面代码出错导致原定的关闭计划被搁置
     const forceStop=setTimeout(()=>{
         Logger.info("正在关闭http服务器以避免端口冲突")
         server.stop().then(()=>Logger.info("http服务器已成功关闭"));
-    },5000);
+    },10000);
     //测试方法：客户端向服务端隔100ms发送三条数据，然后服务端会将它们返回，整个过程异步，程序会继续测试剩下的内容
     (async ()=>{
         //在grakkit上立即执行会导致服务器线程卡死，原因不明，只有加一定的延时能解决
