@@ -1,4 +1,4 @@
-import { Logger,HTTPServer, HTTPRequest, HTTPMethod, HTTPContentType } from "../lib";
+import { Logger,HTTPServer, HTTPRequest, HTTPMethod, HTTPContentType } from "../lib/index.js";
 import { runtimeID } from "./tools";
 //如果在开服的时候立即执行http测试，可能会因为前置未初始化完毕导致出错
 export function start(){

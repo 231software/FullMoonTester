@@ -2,8 +2,8 @@ import {
     Logger,
     InitEvent
 } from "../lib/index.js";
-require("./file.js")
-require("./tools.js")
+import "./file.js"
+import "./tools.js"
 import {start as netStart} from "./net.js"
 netStart();
 InitEvent.on((e)=>{

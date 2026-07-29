@@ -8,7 +8,8 @@
     "plugin_dir_name":"FullMoonTester",
     "supported_platforms":{
         "mode":"bl",
-        "list":["esjse"]
+        "备注":"近期计划有变，grakkit暂时不开发了，所以先不测试了",
+        "list":["esjse","grakkit"]
     },
     "permissionRoot":"fullmoontester",
     "features":[

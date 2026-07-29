@@ -5,8 +5,8 @@ import {
     Dimension,
     RegionRectangle,
     newUUID4,
-} from "../lib"
-import { availableDimensions } from "./world_info"
+} from "../lib/index.js"
+import { availableDimensions } from "./world_info.js"
 Logger.info("-----即将测试日志输出-----")
 Logger.debug("测试日志输出：debug")
 Logger.info("测试日志输出：info")

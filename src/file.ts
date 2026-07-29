@@ -4,7 +4,7 @@ import {
     File,
     Directory,
     YMLFile
-} from "../lib"
+} from "../lib/index.js"
 import { FMPFile } from "../lib/File.js"
 import {
     INFO,data_path
