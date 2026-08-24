@@ -10,3 +10,4 @@ InitEvent.on((e)=>{
     Logger.info("插件初始化事件正常触发");
     return true;
 })
+import "./command.js"
