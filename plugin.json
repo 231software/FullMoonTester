@@ -14,7 +14,8 @@
     "permissionRoot":"fullmoontester",
     "features":[
         "yml",
-        "ws"
+        "ws",
+        "pluginevent"
     ],
     "priorities":{
         "default":[

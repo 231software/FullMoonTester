@@ -11,3 +11,4 @@ InitEvent.on((e)=>{
     return true;
 })
 import "./command.js"
+import "./pluginEvent.js"

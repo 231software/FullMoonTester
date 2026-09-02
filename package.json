@@ -3,6 +3,7 @@
         "build": "node build"
     },
     "dependencies": {
+        "fmp-sync-ipc": "file:fmp-sync-ipc",
         "js-yaml": "^4.1.0",
         "ws": "^8.18.0",
         "yaml": "^2.7.0"
