@@ -7,3 +7,5 @@ temp
 package-lock.json
 .vscode
 AGENTS.md
+.zcode
+fullmoondocs

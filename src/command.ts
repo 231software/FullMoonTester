@@ -1,6 +1,7 @@
 import { FMPCommandEnumOptions } from "../lib/Game/Command.js";
 import { Command, CommandEnum, CommandParam, CommandParamDataType, CommandParamType, Logger,
-    CommandEvent, Player
+    CommandEvent, Player,
+    CommandEnumOptions
  } from "../lib/index.js";
 import { PLATFORM } from "../lib/plugin_info.js";
 Logger.info("是的孩子们是我在注册命令")
@@ -9,7 +10,7 @@ CommandEvent.on(e=>{
     const commandPatters=e.command.split(" ")
     if(commandPatters[0]=="test"){
         if(commandPatters[1]?.startsWith("intercept")){
-            Logger.info("将拦截这个命令")
+            e.executor.sendSuccess("将拦截这个命令")
             return false;
         }
     }
@@ -17,7 +18,7 @@ CommandEvent.on(e=>{
 const testCommand=new Command("test",
     [
         new CommandParam(CommandParamType.Mandatory,"intercept",CommandParamDataType.Enum,new CommandEnum("intercept",["intercept"]),FMPCommandEnumOptions.Unfold),
-        new CommandParam(CommandParamType.Mandatory,"msg",CommandParamDataType.String),
+        new CommandParam(CommandParamType.Mandatory,"msg",CommandParamDataType.Enum,new CommandEnum("msg",["msg"]),CommandEnumOptions.Unfold),
         new CommandParam(CommandParamType.Mandatory,"message",CommandParamDataType.Message)
     ],
     [
@@ -27,22 +28,22 @@ const testCommand=new Command("test",
     ],
     result=>{
         //from转换链用法示例：把执行者转换为玩家，控制台执行者会得到undefined
-        //llse契约层尚未提供from转换链，故仅nodejs平台能真正完成转换
+        //nodejs与llse均已提供from转换链：玩家执行者转出FMPPlayer，控制台执行者得到undefined
         const player=(Player as any).from?.(result.executor)
-        Logger.info("执行者转玩家结果："+(player?player.name:"undefined"))
+        result.executor.sendSuccess("执行者转玩家结果："+(player?player.name:"undefined"))
         if(result.params.get("intercept")?.value=="intercept"){
-            Logger.error("命令拦截失败！")
+            result.executor.sendError("命令拦截失败！")
         }
-        else if(result.params.has("message")){
+        else if(result.params.get("msg")?.value=="msg"){
             //Message类型的参数会吞掉从它开始的所有后续参数，值始终为字符串
             //例如执行 test msg 114514 1919810，此处收到的将是"114514 1919810"
             const message=result.params.get("message")?.value
-            Logger.info("Message参数接收到的内容："+JSON.stringify(message))
-            if(typeof message=="string")Logger.info("Message参数类型检查通过，确为字符串")
-            else Logger.error("Message参数类型检查失败：不是字符串！")
+            result.executor.sendSuccess("Message参数接收到的内容："+JSON.stringify(message))
+            if(typeof message=="string")result.executor.sendSuccess("Message参数类型检查通过，确为字符串")
+            else result.executor.sendError("Message参数类型检查失败：不是字符串！")
         }
         else{
-            Logger.info("空参命令执行成功")
+            result.executor.sendSuccess("空参命令执行成功")
         }
     }
 )
