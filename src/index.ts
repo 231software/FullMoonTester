@@ -12,3 +12,4 @@ InitEvent.on((e)=>{
 })
 import "./command.js"
 import "./pluginEvent.js"
+import "./playerEvent.js"
